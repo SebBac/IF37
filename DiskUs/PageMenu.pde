@@ -1,6 +1,6 @@
 class PageMenu{
   //Le bouton
-  private RectBouton bouton = new RectBouton(53, 291, 253, 59);
+  private RectBouton boutonConv = new RectBouton(53, 291, 253, 59, #DEDEDE, #FFFFFF);
   
   public void display(){
     //fond
@@ -11,14 +11,9 @@ class PageMenu{
     fill(#FFFFFF);
     text("DiskUs", 62, 100);
     
-    //bouton "Nouvelle conversation
+    //les boutons
     update();
-    if(bouton.getOverRect()){
-      fill(#FFFFFF);
-    } else {
-      fill(#DEDEDE);
-    }
-    rect(bouton.getX(), bouton.getY(), bouton.getWidth(), bouton.getHeight());
+    drawAllButtons();
     
     //texte
     textFont(Arial);
@@ -26,12 +21,16 @@ class PageMenu{
     text("Nouvelle conversation", 61, 329);
   }
   
+  public void drawAllButtons(){
+    boutonConv.drawIt();
+  }
+  
   public void update(){
-    bouton.overRect();
+    boutonConv.overRect();
   }
   
   public void mouseAction(){
-    if(bouton.getOverRect()){
+    if(boutonConv.getOverRect()){
       page = page.CONV;
     }
   }

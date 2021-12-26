@@ -6,12 +6,13 @@ PFont FontTitle, Arial;
 PageMenu pageMenu = new PageMenu();
 PageConv pageConv = new PageConv();
 
+String message = "";
+
 void setup(){
   size(360,640);
   FontTitle = createFont("Arial Bold", 72);
   Arial = createFont("Arial", 24);
 }
-
 
 void draw() {  
   switch (page) {
@@ -20,8 +21,7 @@ void draw() {
       break;
       
     case CONV:  // Conversation
-      //pageConv.display();
-      pageConv();
+      pageConv.display();
       break;
       
     default:
@@ -29,15 +29,16 @@ void draw() {
   }
 }
 
-void pageConv(){
-  background(255);
-  fill(0);
-}
-
 void mousePressed() {
     if (page == Page.MENU) {
       pageMenu.mouseAction();
     } else if(page == Page.CONV) {
-      page = Page.MENU;
+      pageConv.mouseAction();
     }
+}
+  
+void keyPressed(){
+  if(page == Page.CONV){
+    pageConv.inputMessage();
   }
+}
