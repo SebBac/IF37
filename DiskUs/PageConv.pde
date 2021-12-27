@@ -20,6 +20,8 @@ class PageConv{
     drawAllButtons();
     
     //images
+    fill(#7D7D7D);
+    rect(9, 540, 342, 92);
     
     //texte
     textFont(Arial);
