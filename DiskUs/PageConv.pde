@@ -73,9 +73,11 @@ class PageConv{
     }
   }
   
-  //Fonction adaptant la taille du message pour l'afficher a l'ecran
+  //Fonction adaptant le message de l'utilisateur pour l'afficher a l'ecran
   public void adaptMessage(){
+    //max est la taille (width) maximum en pixel que le message peut occuper a l'ecran
     int max = 272;
+    //on met a jour "this.adaptedSizeMessage" pour obtenir le message a afficher
     updateSizeMessage(max);
     
     //si le message a afficher est vide, on affiche "|..."
@@ -85,23 +87,25 @@ class PageConv{
       this.adaptedMessage = this.adaptedSizeMessage + '|';
     } else { //sinon on le traite pour l'afficher sur 2 lignes en rajoutant un '\n' au milieu
       String adMessage = this.adaptedSizeMessage;
+      //si le message a afficher n'est pas identique au message ecrit, alors c'est qu'il est reduit : on rajoute donc '...' devant
       if(!adMessage.equals(message)){
         adMessage = "..." + adMessage;
       }
-      String firstPart = "";
-      String secondPart = "";
+      String firstLine = "";
+      String secondLine = "";
       int mLength = adMessage.length();
       int i = 1;
-      firstPart = adMessage.substring(0, mLength -i);
-      while(textWidth(firstPart) > max){
+      firstLine = adMessage.substring(0, mLength -i);
+      while(textWidth(firstLine) > max){
         i++;
-        firstPart = adMessage.substring(0, mLength -i);
+        firstLine = adMessage.substring(0, mLength -i);
       }
-      secondPart = adMessage.substring(mLength -i, mLength);
-      this.adaptedMessage = firstPart + '\n' + secondPart + '|';
+      secondLine = adMessage.substring(mLength -i, mLength);
+      this.adaptedMessage = firstLine + '\n' + secondLine + '|';
     }
   }
   
+  //fonction adaptant la taille du message de l'utilisateur pour lui permettre d'etre affiche
   public void updateSizeMessage(int max){
     int mLenght = message.length();
     
