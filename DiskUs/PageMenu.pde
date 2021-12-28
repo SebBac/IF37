@@ -19,6 +19,8 @@ class PageMenu{
     textFont(Arial);
     fill(#000000);
     text("Nouvelle conversation", 61, 329);
+    
+    txf1.setVisible(false);
   }
   
   public void drawAllButtons(){
