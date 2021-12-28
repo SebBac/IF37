@@ -5,6 +5,7 @@ class PageConv{
   private RectBouton btSugg2 = new RectBouton(119,488, 83, 45, #DEDEDE, #FFFFFF);
   private RectBouton btSugg3 = new RectBouton(213,488, 83, 45, #DEDEDE, #FFFFFF);
   private RectBouton btFav = new RectBouton(306,488, 30, 45, #DEDEDE, #FFFFFF);
+  private String adaptedSizeMessage = "";
   private String adaptedMessage = "|...";
   
   public void display(){
@@ -74,38 +75,57 @@ class PageConv{
   
   //Fonction adaptant la taille du message pour l'afficher a l'ecran
   public void adaptMessage(){
-    if(message.length() == 0){
+    int max = 272;
+    updateSizeMessage(max);
+    
+    //si le message a afficher est vide, on affiche "|..."
+    if(this.adaptedSizeMessage == ""){
       this.adaptedMessage = "|...";
-    } else {
-      String adMessage = message;
+    } else  if(textWidth(this.adaptedSizeMessage) < max){ //s'il tient en une ligne, on l'affiche en une ligne
+      this.adaptedMessage = this.adaptedSizeMessage + '|';
+    } else { //sinon on le traite pour l'afficher sur 2 lignes en rajoutant un '\n' au milieu
+      String adMessage = this.adaptedSizeMessage;
+      if(!adMessage.equals(message)){
+        adMessage = "..." + adMessage;
+      }
       String firstPart = "";
       String secondPart = "";
-      int max = 272;
-      int i = 0;
-      
-      if(textWidth(adMessage) > 2*max){
-        i = 1;
-        adMessage = "..." + adMessage.substring(i, adMessage.length());
-        while(textWidth(adMessage) > 2*max){
-          i++;
-          adMessage = "..." + adMessage.substring(i, adMessage.length());
-        }
-      }
-      
       int mLength = adMessage.length();
-      
-      if(textWidth(adMessage) > max){
-        i = 1;
+      int i = 1;
+      firstPart = adMessage.substring(0, mLength -i);
+      while(textWidth(firstPart) > max){
+        i++;
         firstPart = adMessage.substring(0, mLength -i);
-        while(textWidth(firstPart) > max){
+      }
+      secondPart = adMessage.substring(mLength -i, mLength);
+      this.adaptedMessage = firstPart + '\n' + secondPart + '|';
+    }
+  }
+  
+  public void updateSizeMessage(int max){
+    int mLenght = message.length();
+    
+    //si le message peut rentrer en entier a l'affichage, alors on n'adapte pas sa taille.
+    if(textWidth(message) < 2*max){
+      this.adaptedSizeMessage = message;
+    } else if (key == BACKSPACE) {
+      //On supprime le dernier caractère en reprenant un caractère de "message" au début du String
+      this.adaptedSizeMessage = message.substring(mLenght-(this.adaptedSizeMessage.length()), mLenght);
+      while(textWidth("..." + this.adaptedSizeMessage) < 2*max && this.adaptedSizeMessage.length() + 1 < mLenght){
+        this.adaptedSizeMessage = message.substring(mLenght-(this.adaptedSizeMessage.length() + 1), mLenght);
+      }
+      if(textWidth("..." + this.adaptedSizeMessage) > 2*max){
+        this.adaptedSizeMessage = message.substring(mLenght-(this.adaptedSizeMessage.length() - 1), mLenght);
+      }
+    } else {
+      this.adaptedSizeMessage = this.adaptedSizeMessage + key;
+      int i = 0;
+      if(textWidth("..." + this.adaptedSizeMessage) > 2*max){
+        while(textWidth("..." + this.adaptedSizeMessage) > 2*max){
           i++;
-          firstPart = adMessage.substring(0, mLength -i);
+          this.adaptedSizeMessage = this.adaptedSizeMessage.substring(i, this.adaptedSizeMessage.length());
         }
-        secondPart = adMessage.substring(mLength -i, mLength);
-        adMessage = firstPart + '\n' + secondPart;
       }
-      
-      this.adaptedMessage = adMessage;
-      }
+    }
   }
 }
