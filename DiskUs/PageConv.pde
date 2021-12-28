@@ -23,11 +23,12 @@ class PageConv{
     rect(9, 540, 342, 92);
     
     //texte
-    txf1.setVisible(true);
+    textArea.setVisible(true);
     if (keyPressed && key == ENTER && enterKeyAlreadyPressed == false) {
       enterKeyAlreadyPressed = true;
-      println(t0);
-      txf1.setText("");
+      println(message);
+      tts.speak(message);
+      textArea.setText("");
     }
     if (!keyPressed && enterKeyAlreadyPressed == true) {
       enterKeyAlreadyPressed = false;

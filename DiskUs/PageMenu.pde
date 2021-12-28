@@ -20,7 +20,7 @@ class PageMenu{
     fill(#000000);
     text("Nouvelle conversation", 61, 329);
     
-    txf1.setVisible(false);
+    textArea.setVisible(false);
   }
   
   public void drawAllButtons(){

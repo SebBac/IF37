@@ -1,5 +1,6 @@
 import g4p_controls.*;
 import java.awt.Font;
+import guru.ttslib.*;
 
 enum Page { MENU, CONV };
 Page page = Page.MENU;
@@ -9,20 +10,24 @@ PFont FontTitle, Arial;
 PageMenu pageMenu = new PageMenu();
 PageConv pageConv = new PageConv();
 
-GTextArea txf1;
-String t0;
+GTextArea textArea;
+String message;
 boolean enterKeyAlreadyPressed = false;
+TTS tts;
 
 void setup(){
   size(360,640);
   FontTitle = createFont("Arial Bold", 72);
   Arial = createFont("Arial", 24);
-  
+ 
+  // text area
+  textArea = new GTextArea(this, 10, 540, 341, 92);
+  textArea.setText("");
+  textArea.setFont(new Font("SansSerif", Font.PLAIN, 16));
   enterKeyAlreadyPressed = false;
-
-  txf1 = new GTextArea(this, 9, 540, 290, 92);
-  txf1.setText("");
-  txf1.setFont(new Font("SansSerif", Font.PLAIN, 16));
+  
+  // text to speech
+  tts = new TTS();
 }
 
 void draw() {  
@@ -48,8 +53,9 @@ void mousePressed() {
     }
 }
 
+// Evenement quand l'utilisateur appuie sur la touche "Entrer" dans la text Area
 public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) {
-    if(txf1 == textcontrol && event == GEvent.ENTERED){
-      t0 = txf1.getText();
+    if(textArea == textcontrol && event == GEvent.ENTERED){
+      message = textArea.getText();
     }
   }
