@@ -6,7 +6,8 @@ class PageConv{
   private RectBouton btSugg3 = new RectBouton(213,488, 83, 45, #DEDEDE, #FFFFFF);
   private RectBouton btFav = new RectBouton(205,488, 30, 45, #DEDEDE, #FFFFFF);
   
-  private ArrayList <BulleMessage> listeMessages = new ArrayList<BulleMessage>();
+  public ArrayList <BulleMessage> listeMessages = new ArrayList<BulleMessage>();
+  
   
   public void display(){
     //fond
@@ -80,6 +81,7 @@ class PageConv{
       page = page.MENU;
     }
   }
+  
   
 
   

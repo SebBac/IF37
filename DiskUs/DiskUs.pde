@@ -1,6 +1,7 @@
 import g4p_controls.*;
 import java.awt.Font;
 import guru.ttslib.*;
+import websockets.*;
 
 enum Page { MENU, CONV };
 Page page = Page.MENU;
@@ -9,6 +10,9 @@ PFont FontTitle, Arial;
 
 PageMenu pageMenu = new PageMenu();
 PageConv pageConv = new PageConv();
+
+
+public WebsocketServer socket;
 
 GTextArea textArea;
 String message;
@@ -19,6 +23,7 @@ boolean enterKeyAlreadyPressed;
 TTS tts;
 
 void setup(){
+  socket = new WebsocketServer(this, 1337, "/p5websocket");
   size(360,640);
   FontTitle = createFont("Arial Bold", 72);
   Arial = createFont("Arial", 24);
