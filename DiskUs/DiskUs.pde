@@ -12,7 +12,10 @@ PageConv pageConv = new PageConv();
 
 GTextArea textArea;
 String message;
-boolean enterKeyAlreadyPressed = false;
+int pixelMinMessages; //pixel minimum possible où l'on peut mettre une bulle de message dans la PageConv (utilisé pour les limites du scroll)
+int pixelMaxMessages; //pixel maximum possible où l'on peut mettre une bulle de message dans la PageConv
+int deplacementConvScroll;
+boolean enterKeyAlreadyPressed;
 TTS tts;
 
 void setup(){
@@ -24,7 +27,12 @@ void setup(){
   textArea = new GTextArea(this, 10, 540, 341, 92);
   textArea.setText("");
   textArea.setFont(new Font("SansSerif", Font.PLAIN, 16));
+  pixelMaxMessages = 530;
+  deplacementConvScroll = 0;
   enterKeyAlreadyPressed = false;
+  
+  //messages
+  pixelMaxMessages = 450;
   
   // text to speech
   tts = new TTS();
@@ -59,3 +67,19 @@ public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) {
       message = textArea.getText();
     }
   }
+  
+ public void mouseWheel(MouseEvent event) {
+   if (page == Page.CONV) {
+     if (event.getCount() == -1) {
+       deplacementConvScroll +=20;       
+     }
+     else if (event.getCount() == 1 && deplacementConvScroll > 10) {
+       deplacementConvScroll -=20;
+     }
+     float e = event.getCount();
+     println(e + " " + deplacementConvScroll);
+   }
+
+ }
+  
+  
