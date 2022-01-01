@@ -82,8 +82,6 @@ public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) {
        deplacementConvScroll -=20;
      }
      float e = event.getCount();
-     println(e + " " + deplacementConvScroll + " pixelMaxMessages = " + pixelMaxMessages + "pixelMinMessages =" + pixelMinMessages);
-     println("-(pixelMaxMessages - 450) = " + -(pixelMaxMessages - 450));
    }
 
  }
