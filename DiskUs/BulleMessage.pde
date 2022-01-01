@@ -120,7 +120,7 @@ class BulleMessage {
       // Current char
       char c = this.message.charAt(i);
       w += textWidth(c); // accumulate width
-      System.out.println("char : " +c + ", totalWidth : " +w);
+//      System.out.println("char : " +c + ", totalWidth : " +w);
       if (c == ' ') rememberSpace = i; // Are we a blank space?
       if (w > this.maxWidth) {  // Have we reached the end of a line?
       
@@ -146,12 +146,11 @@ class BulleMessage {
     for (int ind = 0; ind < a.size(); ind++) {
      this.adaptedMessage += a.get(ind);
      this.adaptedMessage += "\n";
-     System.out.println(this.adaptedMessage);
+     //System.out.println(this.adaptedMessage);
     }
     
-    System.out.println("hgdghdgehd");
-    System.out.println(this.adaptedMessage);
-    System.out.println(a.size());
+    //System.out.println(this.adaptedMessage);
+    //System.out.println(a.size());
     
     return a.size();
   }

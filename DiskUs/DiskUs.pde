@@ -83,7 +83,6 @@ public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) {
      }
      float e = event.getCount();
    }
-
  }
   
   
