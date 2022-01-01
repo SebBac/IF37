@@ -29,7 +29,7 @@ void setup(){
   Arial = createFont("Arial", 24);
  
   // text area
-  textArea = new GTextArea(this, 10, 540, 341, 92);
+  textArea = new GTextArea(this, 9, 540, 290, 92);
   textArea.setText("");
   textArea.setFont(new Font("SansSerif", Font.PLAIN, 16));
   pixelMaxMessages = 530;
@@ -75,14 +75,15 @@ public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) {
   
  public void mouseWheel(MouseEvent event) {
    if (page == Page.CONV) {
-     if (event.getCount() == -1) {
+     if (event.getCount() == -1 && -(pixelMaxMessages - 390) > deplacementConvScroll) { //scroll vers le haut
        deplacementConvScroll +=20;       
      }
-     else if (event.getCount() == 1 && deplacementConvScroll > 10) {
+     else if (event.getCount() == 1 && deplacementConvScroll > 10) { //scroll vers le bas
        deplacementConvScroll -=20;
      }
      float e = event.getCount();
-     println(e + " " + deplacementConvScroll);
+     println(e + " " + deplacementConvScroll + " pixelMaxMessages = " + pixelMaxMessages + "pixelMinMessages =" + pixelMinMessages);
+     println("-(pixelMaxMessages - 450) = " + -(pixelMaxMessages - 450));
    }
 
  }

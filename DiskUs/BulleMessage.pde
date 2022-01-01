@@ -30,9 +30,6 @@ class BulleMessage {
     
     int nbLignes = wordWrap();
     this.hauteurBulle = 25 + nbLignes * 24;
-    
-    
-
 }
   
   public void drawIt() {
@@ -62,7 +59,6 @@ class BulleMessage {
     
     stroke(#000000);
     pixelMaxMessages -= this.hauteurBulle + 30;
-
   }
   
   //Fonction adaptant la taille du message pour l'afficher a l'ecran dans la bulle de texte
@@ -159,9 +155,4 @@ class BulleMessage {
     
     return a.size();
   }
-  
-  
-  
-  
-  
 }
