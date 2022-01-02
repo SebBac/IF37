@@ -5,9 +5,9 @@ class PageConv{
   private RectBouton btSugg2 = new RectBouton(119,488, 83, 45, #DEDEDE, #FFFFFF);
   private RectBouton btSugg3 = new RectBouton(213,488, 83, 45, #DEDEDE, #FFFFFF);
   private RectBouton btFav = new RectBouton(306,488, 30, 45, #DEDEDE, #FFFFFF);
+  private RectBouton btSend = new RectBouton(313,574, 23, 23, #DEDEDE, #FFFFFF);
   
   public ArrayList <BulleMessage> listeMessages = new ArrayList<BulleMessage>();
-  
   
   public void display(){
     //fond
@@ -31,11 +31,20 @@ class PageConv{
     
     //texte
     textArea.setVisible(true);
-    addBulles();
+    addBullesTTS();
     
     //les boutons
     update();
     drawAllButtons();
+  }
+  
+  public void update(){
+    btReturn.overRect();
+    btSugg1.overRect();
+    btSugg2.overRect();
+    btSugg3.overRect();
+    btFav.overRect();
+    btSend.overRect();
   }
   
   public void drawAllButtons(){
@@ -44,6 +53,7 @@ class PageConv{
     btSugg2.drawIt();
     btSugg3.drawIt();
     btFav.drawIt();
+    btSend.drawIt();
   }
   
   public void drawAllMessages() {
@@ -54,39 +64,51 @@ class PageConv{
     }
   }
   
-  public void addBulles(){
-    if (keyPressed && key == ENTER && enterKeyAlreadyPressed == false) {
-      enterKeyAlreadyPressed = true;
-      
-      println(message);
-      
-      // Créer bulle de message
-      /*int nbLignesMessage = wordWrap(message, 205);
-      int hauteurBulle = 20 + nbLignesMessage * 22;
-      listeMessages.add(new BulleMessage(message, 105, pixelMaxMessages - hauteurBulle, 220, hauteurBulle, #FFFFFF));
-      pixelMaxMessages = pixelMaxMessages - hauteurBulle - 20;*/
-      textArea.setText("");
-      listeMessages.add(0, new BulleMessage(message, #FFFFFF));
-            
-      tts.speak(message);
-      
-    }
-    if (!keyPressed && enterKeyAlreadyPressed == true) {
-      enterKeyAlreadyPressed = false;
+  public void addBullesTTS(){
+    if (keyPressed && key == ENTER) {
+      sendBulleTTS();
     }
   }
   
-  public void update(){
-    btReturn.overRect();
-    btSugg1.overRect();
-    btSugg2.overRect();
-    btSugg3.overRect();
-    btFav.overRect();
+  public void sendBulleTTS(){
+    message = textArea.getText();
+    if(message.length() > 1){ //si la textArea est vide, le message fait quand même 1 caractère de longueur
+      bulleTTS();
+    }
+  }
+  
+  public void sendBulleTTS(String m){
+    message = m;
+    bulleTTS();
+  }
+  
+  public void bulleTTS(){
+    println(message);
+    textArea.setText("");
+    listeMessages.add(0, new BulleMessage(message, #60A0FF));
+          
+    tts.speak(message);
   }
   
   public void mouseAction(){
     if(btReturn.getOverRect()){
-      page = page.MENU;
+      page = Page.MENU;
+    } else if(btSugg1.getOverRect()){
+      if(pageFav.getListeMessageFav().size()>=1){
+        sendBulleTTS(pageFav.getListeMessageFav().get(0));
+      }
+    } else if(btSugg2.getOverRect()){
+      if(pageFav.getListeMessageFav().size()>=2){
+        sendBulleTTS(pageFav.getListeMessageFav().get(1));
+      }
+    } else if(btSugg3.getOverRect()){
+      if(pageFav.getListeMessageFav().size()>=3){
+        sendBulleTTS(pageFav.getListeMessageFav().get(2));
+      }
+    } else if (btFav.getOverRect()){
+      page = Page.FAV;
+    } else if (btSend.getOverRect()){
+      sendBulleTTS();
     }
   }
 }

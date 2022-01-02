@@ -3,14 +3,14 @@ import java.awt.Font;
 import guru.ttslib.*;
 import websockets.*;
 
-enum Page { MENU, CONV };
+enum Page { MENU, CONV, FAV };
 Page page = Page.MENU;
 
 PFont FontTitle, Arial;
 
 PageMenu pageMenu = new PageMenu();
 PageConv pageConv = new PageConv();
-
+PageFav pageFav = new PageFav();
 
 public WebsocketServer socket;
 
@@ -27,6 +27,7 @@ void setup(){
   size(360,640);
   FontTitle = createFont("Arial Bold", 72);
   Arial = createFont("Arial", 24);
+  link("https://codepen.io/getflourish/pen/NpBGqe");
  
   // text area
   textArea = new GTextArea(this, 9, 540, 290, 92);
@@ -34,7 +35,6 @@ void setup(){
   textArea.setFont(new Font("SansSerif", Font.PLAIN, 16));
   pixelMaxMessages = 530;
   deplacementConvScroll = 0;
-  enterKeyAlreadyPressed = false;
   
   //messages
   pixelMaxMessages = 450;
@@ -53,6 +53,10 @@ void draw() {
       pageConv.display();
       break;
       
+    case FAV:
+      pageFav.display();
+      break;
+      
     default:
       break;
   }
@@ -63,17 +67,12 @@ void mousePressed() {
       pageMenu.mouseAction();
     } else if(page == Page.CONV) {
       pageConv.mouseAction();
+    } else if(page == Page.FAV) {
+      pageFav.mouseAction();
     }
 }
-
-// Evenement quand l'utilisateur appuie sur la touche "Entrer" dans la text Area
-public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) {
-    if(textArea == textcontrol && event == GEvent.ENTERED){
-      message = textArea.getText();
-    }
-  }
   
- public void mouseWheel(MouseEvent event) {
+public void mouseWheel(MouseEvent event) {
    if (page == Page.CONV) {
      if (event.getCount() == -1 && -(pixelMaxMessages - 390) > deplacementConvScroll) { //scroll vers le haut
        deplacementConvScroll +=20;       
