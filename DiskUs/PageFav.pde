@@ -49,7 +49,7 @@ class PageFav{
   public void drawAllMessages() {
     textSize(16);
     pixelMaxFav = 520;
-    for (int i = 0; i < listeMessagesFav.size(); i++) {
+    for (int i = listeMessagesFav.size() -1 ; i >= 0; i--) {
       listeMessagesFav.get(i).drawIt(); 
     }
   }
@@ -57,24 +57,33 @@ class PageFav{
   public void enterAddMessageFav(){
     if (keyPressed && key == ENTER) {
       addMessageFav();
-
     }
   }
   
   public void addMessageFav(){
     message = textArea.getText();
     if(message.length() > 1){
-      this.listeMessagesFav.add(0, new BulleMessageFav(message, #FFFFFF));
+      this.listeMessagesFav.add(new BulleMessageFav(message, #FFFFFF));
       System.out.println("add message fav : " + message);
       textArea.setText("");
     }
   }
   
   public void mouseAction(){
+
     if(this.btReturn.getOverRect()){
       page = Page.CONV;
     } else if (btSend.getOverRect()){
       addMessageFav();
+    }
+    for (int i = 0; i < listeMessagesFav.size(); i++) {
+      if (listeMessagesFav.get(i).getOverRect()) {
+        
+        // On envoie le message sur lequel l'utilisateur a cliqué
+        pageConv.sendBulleTTS(pageFav.getListeMessageFav().get(i).getMessage());
+        // On retourne à la page Conv
+        page = Page.CONV;
+      }
     }
   }
 }

@@ -59,7 +59,7 @@ class PageConv{
   public void drawAllMessages() {
     textSize(16);
     pixelMaxMessages = 450;
-    for (int i = 0; i < listeMessagesConv.size(); i++) {
+    for (int i = listeMessagesConv.size() -1 ; i >= 0; i--) {
       listeMessagesConv.get(i).drawIt(); 
     }
   }
@@ -85,7 +85,7 @@ class PageConv{
   public void bulleTTS(){
     println(message);
     textArea.setText("");
-    listeMessagesConv.add(0, new BulleMessageConv(message, #60A0FF));
+    listeMessagesConv.add(new BulleMessageConv(message, #60A0FF));
           
     tts.speak(message);
   }

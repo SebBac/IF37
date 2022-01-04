@@ -41,53 +41,5 @@ class BulleMessageConv extends BulleMessage {
     
     stroke(#000000);
     pixelMaxMessages -= this.hauteurBulle + 30;
-  }
-  
-  
-  /*private int adaptMessage(String message){
-    int i;
-    int positionEspace;
-    String temp;
-    ArrayList<String> listeLignesMessage = new ArrayList<String>();
-    
-    // Tant que le message ne tient pas sur une ligne
-    while (textWidth(message) > max) {
-     i = 1;
-     temp = message.substring(0, i);
-     
-     // Tant que le message "temp" n'est pas plus large que max, on ajoute une lettre au message "temp"
-      while (textWidth(temp) < max) {
-       if (message.charAt(i) == ' ') positionEspace = i;
-       i++;
-       temp = message.substring(0, i);        
-      }
-      
-      listeLignesMessage.add(temp);
-      message = message.substring(i, message.length());
-    }
-    
-    //On ajoute la dernière ligne
-    listeLignesMessage.add(message);
-  
-    // Reconstitution du message avec les sauts de ligne
-    message = "";
-    
-    for (i = 0; i < listeLignesMessage.size(); i++) {
-      message += listeLignesMessage.get(i) + "\n";
-    }
-    
-    System.out.println(message);
-    
-    int nbSauts = 0;
-    for (i = 0; i < message.length(); i++) {
-      if (message.charAt(i) == '\n') {
-        nbSauts ++;        
-      }
-      
-    }
-    
-    return nbSauts;
-  }*/
-  
-  
+  }  
 }

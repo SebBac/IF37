@@ -100,8 +100,6 @@ public void mouseWheel(MouseEvent event) {
      else if (event.getCount() == 1 && deplacementFavScroll > 10) { //scroll vers le bas
        deplacementFavScroll -=20;
      }
-     
-     System.out.println("scroll : " + deplacementFavScroll);
    }
  }
   
