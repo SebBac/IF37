@@ -3,9 +3,9 @@ class PageFav{
   private RectBouton btReturn = new RectBouton(15, 15, 84, 52, #DEDEDE, #FFFFFF);
   private RectBouton btSend = new RectBouton(313,574, 23, 23, #DEDEDE, #FFFFFF);
   
-  ArrayList<String> listeMessagesFav = new ArrayList<String>();
+  ArrayList<BulleMessageFav> listeMessagesFav = new ArrayList<BulleMessageFav>();
   
-  public ArrayList<String> getListeMessageFav(){
+  public ArrayList<BulleMessageFav> getListeMessageFav(){
     return this.listeMessagesFav;
   }
   
@@ -33,6 +33,7 @@ class PageFav{
     //les boutons
     update();
     drawAllButtons();
+    drawAllMessages();
   }
   
   public void update(){
@@ -45,16 +46,26 @@ class PageFav{
     this.btSend.drawIt();
   }
   
+  public void drawAllMessages() {
+    textSize(16);
+    pixelMaxFav = 520;
+    for (int i = 0; i < listeMessagesFav.size(); i++) {
+      listeMessagesFav.get(i).drawIt(); 
+    }
+  }
+  
   public void enterAddMessageFav(){
     if (keyPressed && key == ENTER) {
       addMessageFav();
+
     }
   }
   
   public void addMessageFav(){
     message = textArea.getText();
     if(message.length() > 1){
-      this.listeMessagesFav.add(message);
+      this.listeMessagesFav.add(0, new BulleMessageFav(message, #FFFFFF));
+      System.out.println("add message fav : " + message);
       textArea.setText("");
     }
   }

@@ -16,9 +16,12 @@ public WebsocketServer socket;
 
 GTextArea textArea;
 String message;
-int pixelMinMessages; //pixel minimum possible où l'on peut mettre une bulle de message dans la PageConv (utilisé pour les limites du scroll)
-int pixelMaxMessages; //pixel maximum possible où l'on peut mettre une bulle de message dans la PageConv
+
+int pixelMaxMessages; //pixel maximum possible où l'on peut mettre une bulle de message dans la PageConv et dans la PageFav (utilisé pour les limites du scroll et pour l'affichage des messages)
+int pixelMaxFav;
 int deplacementConvScroll;
+int deplacementFavScroll;
+
 boolean enterKeyAlreadyPressed;
 TTS tts;
 
@@ -33,11 +36,16 @@ void setup(){
   textArea = new GTextArea(this, 9, 540, 290, 92);
   textArea.setText("");
   textArea.setFont(new Font("SansSerif", Font.PLAIN, 16));
-  pixelMaxMessages = 530;
-  deplacementConvScroll = 0;
   
   //messages
   pixelMaxMessages = 450;
+  
+  // favoris
+  pixelMaxFav = 525;
+  
+  // Scroll
+  deplacementConvScroll = 0;
+  deplacementFavScroll = 0;
   
   // text to speech
   tts = new TTS();
@@ -73,6 +81,8 @@ void mousePressed() {
 }
   
 public void mouseWheel(MouseEvent event) {
+  
+   // Scroll dans la page Conv
    if (page == Page.CONV) {
      if (event.getCount() == -1 && -(pixelMaxMessages - 390) > deplacementConvScroll) { //scroll vers le haut
        deplacementConvScroll +=20;       
@@ -80,7 +90,18 @@ public void mouseWheel(MouseEvent event) {
      else if (event.getCount() == 1 && deplacementConvScroll > 10) { //scroll vers le bas
        deplacementConvScroll -=20;
      }
-     float e = event.getCount();
+   }
+   
+   // Scroll dans la page Fav
+   else if (page == Page.FAV) {
+     if (event.getCount() == -1 && -(pixelMaxFav - 530) > deplacementFavScroll) { //scroll vers le haut
+       deplacementFavScroll +=20;       
+     }
+     else if (event.getCount() == 1 && deplacementFavScroll > 10) { //scroll vers le bas
+       deplacementFavScroll -=20;
+     }
+     
+     System.out.println("scroll : " + deplacementFavScroll);
    }
  }
   

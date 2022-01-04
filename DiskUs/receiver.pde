@@ -5,5 +5,5 @@ void webSocketServerEvent(String msg){
 }
 
 void creerMessage(String msg) {
-  pageConv.listeMessages.add(0, new BulleMessage(msg, #FFFFFF));
+  pageConv.listeMessagesConv.add(0, new BulleMessageConv(msg, #FFFFFF));
 }

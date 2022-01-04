@@ -7,7 +7,7 @@ class PageConv{
   private RectBouton btFav = new RectBouton(306,488, 30, 45, #DEDEDE, #FFFFFF);
   private RectBouton btSend = new RectBouton(313,574, 23, 23, #DEDEDE, #FFFFFF);
   
-  public ArrayList <BulleMessage> listeMessages = new ArrayList<BulleMessage>();
+  public ArrayList <BulleMessageConv> listeMessagesConv = new ArrayList<BulleMessageConv>();
   
   public void display(){
     //fond
@@ -59,8 +59,8 @@ class PageConv{
   public void drawAllMessages() {
     textSize(16);
     pixelMaxMessages = 450;
-    for (int i = 0; i < listeMessages.size(); i++) {
-      listeMessages.get(i).drawIt(); 
+    for (int i = 0; i < listeMessagesConv.size(); i++) {
+      listeMessagesConv.get(i).drawIt(); 
     }
   }
   
@@ -85,7 +85,7 @@ class PageConv{
   public void bulleTTS(){
     println(message);
     textArea.setText("");
-    listeMessages.add(0, new BulleMessage(message, #60A0FF));
+    listeMessagesConv.add(0, new BulleMessageConv(message, #60A0FF));
           
     tts.speak(message);
   }
@@ -95,15 +95,15 @@ class PageConv{
       page = Page.MENU;
     } else if(btSugg1.getOverRect()){
       if(pageFav.getListeMessageFav().size()>=1){
-        sendBulleTTS(pageFav.getListeMessageFav().get(0));
+        sendBulleTTS(pageFav.getListeMessageFav().get(0).getMessage());
       }
     } else if(btSugg2.getOverRect()){
       if(pageFav.getListeMessageFav().size()>=2){
-        sendBulleTTS(pageFav.getListeMessageFav().get(1));
+        sendBulleTTS(pageFav.getListeMessageFav().get(1).getMessage());
       }
     } else if(btSugg3.getOverRect()){
       if(pageFav.getListeMessageFav().size()>=3){
-        sendBulleTTS(pageFav.getListeMessageFav().get(2));
+        sendBulleTTS(pageFav.getListeMessageFav().get(2).getMessage());
       }
     } else if (btFav.getOverRect()){
       page = Page.FAV;
