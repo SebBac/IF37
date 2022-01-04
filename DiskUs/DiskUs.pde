@@ -3,27 +3,29 @@ import java.awt.Font;
 import guru.ttslib.*;
 import websockets.*;
 
+// Pages
 enum Page { MENU, CONV, FAV };
 Page page = Page.MENU;
-
-PFont FontTitle, Arial;
-
 PageMenu pageMenu = new PageMenu();
 PageConv pageConv = new PageConv();
 PageFav pageFav = new PageFav();
 
+// Serveur websocket pour la reconnaissance vocale
 public WebsocketServer socket;
+// Synthèse vocale
+TTS tts;
 
+// Polices d'écriture
+PFont FontTitle, Arial;
+
+// Messages et zones de texte
 GTextArea textArea;
 String message;
+int pixelMaxMessages; //pixel maximum possible où l'on peut mettre une bulle de message dans la PageConv (utilisé pour les limites du scroll et pour l'affichage des messages)
+int pixelMaxFav; //pixel maximum possible où l'on peut mettre une bulle de message dans la PageFav (utilisé pour les limites du scroll et pour l'affichage des messages)
+int deplacementConvScroll; // deplacement du au scroll dans la page Conv
+int deplacementFavScroll; // deplacement du au scroll dans la page Fav
 
-int pixelMaxMessages; //pixel maximum possible où l'on peut mettre une bulle de message dans la PageConv et dans la PageFav (utilisé pour les limites du scroll et pour l'affichage des messages)
-int pixelMaxFav;
-int deplacementConvScroll;
-int deplacementFavScroll;
-
-boolean enterKeyAlreadyPressed;
-TTS tts;
 
 void setup(){
   socket = new WebsocketServer(this, 1337, "/p5websocket");
@@ -61,7 +63,7 @@ void draw() {
       pageConv.display();
       break;
       
-    case FAV:
+    case FAV: // Favoris
       pageFav.display();
       break;
       

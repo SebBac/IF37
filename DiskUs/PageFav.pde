@@ -5,10 +5,9 @@ class PageFav{
   
   ArrayList<BulleMessageFav> listeMessagesFav = new ArrayList<BulleMessageFav>();
   
-  public ArrayList<BulleMessageFav> getListeMessageFav(){
-    return this.listeMessagesFav;
-  }
+
   
+  // Affichage de la page Fav
   public void display(){
     //fond
     background(#2D2727);
@@ -36,16 +35,19 @@ class PageFav{
     drawAllMessages();
   }
   
+  // Verifie si le curseur est sur chaque bouton (utile pour la fonction mouseAction())
   public void update(){
     this.btReturn.overRect();
     this.btSend.overRect();
   }
   
+  // Dessine les boutons
   public void drawAllButtons(){
     this.btReturn.drawIt();
     this.btSend.drawIt();
   }
   
+  // Dessine les messages
   public void drawAllMessages() {
     textSize(16);
     pixelMaxFav = 520;
@@ -54,31 +56,43 @@ class PageFav{
     }
   }
   
+  // Ajoute un message aux favoris : Appel de la méthode addMessageFav
   public void enterAddMessageFav(){
     if (keyPressed && key == ENTER) {
       addMessageFav();
     }
   }
   
+  // Methode qui ajoute un message aux favoris s'il n'est pas vide : Création d'une nouvelle bulle de message favoris + nettoyage de la zone de texte
   public void addMessageFav(){
     message = textArea.getText();
     if(message.length() > 1){
       this.listeMessagesFav.add(new BulleMessageFav(message, #FFFFFF));
-      System.out.println("add message fav : " + message);
       textArea.setText("");
     }
   }
   
+  // Getter de la liste des messages favoris
+  public ArrayList<BulleMessageFav> getListeMessageFav(){
+    return this.listeMessagesFav;
+  }
+  
+  // Methode gérant les clics de l'utilisateur
   public void mouseAction(){
 
+    // Si le curseur était sur le bouton retour, on retourne à la page Conv
     if(this.btReturn.getOverRect()){
       page = Page.CONV;
-    } else if (btSend.getOverRect()){
+    } 
+    
+    // Si le curseur était sur le bouton d'envoi, on ajoute le message de la textArea aux favoris
+    else if (btSend.getOverRect()){
       addMessageFav();
     }
+    
+    // Pour chaque message favoris, si le curseur était sur la bulle du message lors du clic, on envoie le message
     for (int i = 0; i < listeMessagesFav.size(); i++) {
       if (listeMessagesFav.get(i).getOverRect()) {
-        
         // On envoie le message sur lequel l'utilisateur a cliqué
         pageConv.sendBulleTTS(pageFav.getListeMessageFav().get(i).getMessage());
         // On retourne à la page Conv

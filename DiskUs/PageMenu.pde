@@ -23,15 +23,19 @@ class PageMenu{
     textArea.setVisible(false);
   }
   
+  // Dessine les boutons
   public void drawAllButtons(){
     boutonConv.drawIt();
   }
   
+  // Verifie si le curseur est sur chaque bouton (utile pour la fonction mouseAction())
   public void update(){
     boutonConv.overRect();
   }
   
+  // Gère les actions de la souris
   public void mouseAction(){
+    // Si le curseur était sur le bouton de conversation lors du clic, on va à la page Conv
     if(boutonConv.getOverRect()){
       page = page.CONV;
     }

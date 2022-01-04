@@ -7,6 +7,7 @@ class RectBouton{
   private color colorBase = #000000;
   private color colorHover = #FFFFFF;
   
+  // Constructeur
   public RectBouton(int x, int y, int w, int h, color cBase, color cHover){
     this.rectX = x;
     this.rectY = y;
@@ -16,14 +17,17 @@ class RectBouton{
     this.colorHover = cHover;
   }
   
+  // Setter de OverRect
   public void setOverRect(boolean bool){
     this.overRect = bool;
   }
   
+  // Getter de OverRect
   public boolean getOverRect(){
     return this.overRect;
   }
   
+  // Dessine le bouton
   public void drawIt(){
     if(this.overRect){
       fill(this.colorHover);
@@ -33,6 +37,7 @@ class RectBouton{
     rect(rectX, rectY, rectWidth, rectHeight);
   }
   
+  // Méthode qui renvoie si le curseur est sur la bulle de message ou non
   public void overRect()  {
     if (rectX <= mouseX && mouseX <= rectX+rectWidth && 
         rectY <= mouseY && mouseY <= rectY+rectHeight) {

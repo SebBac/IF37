@@ -7,8 +7,10 @@ class PageConv{
   private RectBouton btFav = new RectBouton(306,488, 30, 45, #DEDEDE, #FFFFFF);
   private RectBouton btSend = new RectBouton(313,574, 23, 23, #DEDEDE, #FFFFFF);
   
+  //Liste des messages de la conversation
   public ArrayList <BulleMessageConv> listeMessagesConv = new ArrayList<BulleMessageConv>();
   
+  //Affichage de la pageConv
   public void display(){
     //fond
     background(#2D2727);
@@ -38,6 +40,7 @@ class PageConv{
     drawAllButtons();
   }
   
+  // Verifie si le curseur est sur chaque bouton (utile pour la fonction mouseAction())
   public void update(){
     btReturn.overRect();
     btSugg1.overRect();
@@ -47,6 +50,7 @@ class PageConv{
     btSend.overRect();
   }
   
+  // Dessine les boutons
   public void drawAllButtons(){
     btReturn.drawIt();
     btSugg1.drawIt();
@@ -56,6 +60,7 @@ class PageConv{
     btSend.drawIt();
   }
   
+  // Dessine les messages de la conversation
   public void drawAllMessages() {
     textSize(16);
     pixelMaxMessages = 450;
@@ -64,12 +69,14 @@ class PageConv{
     }
   }
   
+  // Ajout d'un message : Appel de la méthode SendBulleTTS()
   public void addBullesTTS(){
     if (keyPressed && key == ENTER) {
       sendBulleTTS();
     }
   }
   
+  // Ajout d'un message s'il est non vide
   public void sendBulleTTS(){
     message = textArea.getText();
     if(message.length() > 1){ //si la textArea est vide, le message fait quand même 1 caractère de longueur
@@ -77,11 +84,13 @@ class PageConv{
     }
   }
   
+  // Ajout d'un message passé en paramètre
   public void sendBulleTTS(String m){
     message = m;
     bulleTTS();
   }
   
+  // Ajout de la bulle de message, synthèse vocale du message et reinitialisation de la zone de texte
   public void bulleTTS(){
     println(message);
     textArea.setText("");
@@ -90,24 +99,37 @@ class PageConv{
     tts.speak(message);
   }
   
+  // Methode gérant les clics de l'utilisateur
   public void mouseAction(){
+    
+    // Si le curseur était sur le bouton retour, on retourne au menu
     if(btReturn.getOverRect()){
       page = Page.MENU;
-    } else if(btSugg1.getOverRect()){
+    }
+    
+    // Si le curseur était sur le bouton de suggestion d'un massage favori, on envoie ce message
+    else if(btSugg1.getOverRect()){
       if(pageFav.getListeMessageFav().size()>=1){
         sendBulleTTS(pageFav.getListeMessageFav().get(0).getMessage());
       }
-    } else if(btSugg2.getOverRect()){
+    } 
+    else if(btSugg2.getOverRect()){
       if(pageFav.getListeMessageFav().size()>=2){
         sendBulleTTS(pageFav.getListeMessageFav().get(1).getMessage());
       }
-    } else if(btSugg3.getOverRect()){
+    } 
+    else if(btSugg3.getOverRect()){
       if(pageFav.getListeMessageFav().size()>=3){
         sendBulleTTS(pageFav.getListeMessageFav().get(2).getMessage());
       }
-    } else if (btFav.getOverRect()){
+    } 
+    
+    //Si le curseur était sur le bouton menant à la page Fav, on change de page pour la page Fav
+    else if (btFav.getOverRect()){
       page = Page.FAV;
-    } else if (btSend.getOverRect()){
+    } 
+    // Si le curseur était sur le bouton d'envoi, on envoie le message de la textArea
+    else if (btSend.getOverRect()){
       sendBulleTTS();
     }
   }
