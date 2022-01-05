@@ -35,9 +35,50 @@ class PageConv{
     textArea.setVisible(true);
     addBullesTTS();
     
+    
+    
     //les boutons
     update();
     drawAllButtons();
+    
+    textFont(Arial);
+    textSize(12);
+    fill(#000000);
+    text("Retour", 40, 45);
+    text(">", 321,590);
+    text("fav", 310,515);
+    
+    
+    writeFavOnButton();
+    
+  }
+  
+  public void writeFavOnButton() {
+    if (pageFav.getListeMessagesFav().size() == 0) {
+      textSize(20);
+      text("...", 57,515);
+      text("...", 152,515);
+      text("...", 246,515);
+    } 
+    else {
+      if (pageFav.getListeMessagesFav().size() == 1){
+        text(pageFav.getListeMessagesFav().get(0).getMessageForFavButton(), 30,515);
+        textSize(20);
+        text("...", 152,515);
+        text("...", 246,515);
+      }
+      else if (pageFav.getListeMessagesFav().size() == 2){
+        text(pageFav.getListeMessagesFav().get(0).getMessageForFavButton(), 30,515);
+        text(pageFav.getListeMessagesFav().get(1).getMessageForFavButton(), 125,515);
+        textSize(20);
+        text("...", 246,515);
+      }
+      else if (pageFav.getListeMessagesFav().size() >= 3){
+        text(pageFav.getListeMessagesFav().get(0).getMessageForFavButton(), 30,515);
+        text(pageFav.getListeMessagesFav().get(1).getMessageForFavButton(), 125,515);
+        text(pageFav.getListeMessagesFav().get(2).getMessageForFavButton(), 219,515);
+      }
+    }
   }
   
   // Verifie si le curseur est sur chaque bouton (utile pour la fonction mouseAction())

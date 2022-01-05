@@ -6,6 +6,9 @@ class PageFav{
   ArrayList<BulleMessageFav> listeMessagesFav = new ArrayList<BulleMessageFav>();
   
 
+  public ArrayList<BulleMessageFav> getListeMessagesFav() {
+    return this.listeMessagesFav;
+  }
   
   // Affichage de la page Fav
   public void display(){
@@ -35,6 +38,12 @@ class PageFav{
     //les boutons
     update();
     drawAllButtons();
+    
+    textFont(Arial);
+    textSize(12);
+    fill(#000000);
+    text("Retour", 40, 45);
+    text(">", 321,590);
   }
   
   // Verifie si le curseur est sur chaque bouton (utile pour la fonction mouseAction())

@@ -30,6 +30,11 @@ abstract class BulleMessage {
     return this.message;
   }
   
+  public String getMessageForFavButton() {
+    if (this.message.length() < 11) return this.message;
+    return this.message.substring(0, 11);
+  }
+  
   // Méthode permettant de dessiner la bulle de message
   public abstract void drawIt();
   

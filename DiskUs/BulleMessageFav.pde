@@ -11,6 +11,7 @@ class BulleMessageFav extends BulleMessage {
     this.colorHover = cHover;
   }
   
+  
   // Méthode permettant de dessiner la bulle de message
   public void drawIt() {
     
