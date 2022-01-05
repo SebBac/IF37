@@ -1,10 +1,14 @@
 class BulleMessageFav extends BulleMessage {
   
+  private int minY = 76;
+  private int maxY = 540;
   private boolean overRect = false;
+  protected color colorHover = #FFFFFF;
   
   // Constructeur
-  public BulleMessageFav (String message, color cBase) { 
+  public BulleMessageFav (String message, color cBase, color cHover) { 
     super(message, cBase);
+    this.colorHover = cHover;
   }
   
   // Méthode permettant de dessiner la bulle de message
@@ -21,7 +25,11 @@ class BulleMessageFav extends BulleMessage {
     
     // Dessin du rectangle
     noStroke();
-    fill(this.colorBase);
+    if(this.getOverRect()){
+      fill(this.colorHover);
+    } else {
+      fill(this.colorBase);
+    }
     rect(rectX, rectY, rectWidth, rectHeight);   
  
     // Ajout du texte au rectangle
@@ -36,7 +44,8 @@ class BulleMessageFav extends BulleMessage {
   
    // Méthode qui renvoie si le curseur est sur la bulle de message ou non
    public void overRect()  {
-    if (rectX <= mouseX && mouseX <= rectX+rectWidth && 
+    if (minY <= mouseY && mouseY <= maxY &&
+        rectX <= mouseX && mouseX <= rectX+rectWidth && 
         rectY <= mouseY && mouseY <= rectY+rectHeight) {
       setOverRect(true);
     } else {

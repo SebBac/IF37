@@ -16,6 +16,9 @@ class PageFav{
     fill(#414040);
     rect(9, 9, 342, 622);
     
+    //messages favoris
+    drawAllMessages();
+    
     //images
     fill(#7D7D7D);
     rect(9, 540, 342, 92); //rectangle fond zone de texte
@@ -32,7 +35,6 @@ class PageFav{
     //les boutons
     update();
     drawAllButtons();
-    drawAllMessages();
   }
   
   // Verifie si le curseur est sur chaque bouton (utile pour la fonction mouseAction())
@@ -67,7 +69,7 @@ class PageFav{
   public void addMessageFav(){
     message = textArea.getText();
     if(message.length() > 1){
-      this.listeMessagesFav.add(new BulleMessageFav(message, #FFFFFF));
+      this.listeMessagesFav.add(new BulleMessageFav(message, #FFF482, #FFE70A));
       textArea.setText("");
     }
   }
@@ -94,6 +96,7 @@ class PageFav{
     for (int i = 0; i < listeMessagesFav.size(); i++) {
       if (listeMessagesFav.get(i).getOverRect()) {
         // On envoie le message sur lequel l'utilisateur a cliqué
+        println("mouse Y = " + mouseY);
         pageConv.sendBulleTTS(pageFav.getListeMessageFav().get(i).getMessage());
         // On retourne à la page Conv
         page = Page.CONV;

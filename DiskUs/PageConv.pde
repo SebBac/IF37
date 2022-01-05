@@ -49,8 +49,7 @@ class PageConv{
     btFav.overRect();
     btSend.overRect();
   }
-  
-  // Dessine les boutons
+   // Dessine les boutons
   public void drawAllButtons(){
     btReturn.drawIt();
     btSugg1.drawIt();

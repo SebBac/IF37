@@ -86,7 +86,7 @@ public void mouseWheel(MouseEvent event) {
   
    // Scroll dans la page Conv
    if (page == Page.CONV) {
-     if (event.getCount() == -1 && -(pixelMaxMessages - 390) > deplacementConvScroll) { //scroll vers le haut
+     if (event.getCount() == -1 && 390 -pixelMaxMessages > deplacementConvScroll) { //scroll vers le haut
        deplacementConvScroll +=20;       
      }
      else if (event.getCount() == 1 && deplacementConvScroll > 10) { //scroll vers le bas
@@ -96,7 +96,7 @@ public void mouseWheel(MouseEvent event) {
    
    // Scroll dans la page Fav
    else if (page == Page.FAV) {
-     if (event.getCount() == -1 && -(pixelMaxFav - 530) > deplacementFavScroll) { //scroll vers le haut
+     if (event.getCount() == -1 && 440 - pixelMaxFav > deplacementFavScroll) { //scroll vers le haut
        deplacementFavScroll +=20;       
      }
      else if (event.getCount() == 1 && deplacementFavScroll > 10) { //scroll vers le bas
